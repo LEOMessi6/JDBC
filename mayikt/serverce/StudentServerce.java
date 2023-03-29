@@ -10,7 +10,11 @@ public class StudentServerce {
     private Studentdao studentdao = new Studentdao();
     public ArrayList<StudentEntity> allStudent(){
         //通过业务逻辑层去调用dao层代码
-        ArrayList<StudentEntity> studentEntities = Studentdao.allStudent();
+        ArrayList<StudentEntity> studentEntities = Studentdao.inquireStudent("select * from mayikt_student");
         return studentEntities;
+    }
+    public ArrayList<StudentEntity> inquireByIdStudent(Long stuId){
+        ArrayList<StudentEntity> byIdStudent = Studentdao.getByIdStudent(stuId);
+        return byIdStudent;
     }
 }

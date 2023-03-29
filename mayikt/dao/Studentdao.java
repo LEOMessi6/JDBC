@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Studentdao {
     //学生数据对象访问层
-    public static ArrayList<StudentEntity> allStudent() {
+    public static ArrayList<StudentEntity> inquireStudent(String sql) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -17,7 +17,7 @@ public class Studentdao {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/javaweb?serverTimezone=UTC", "root", "123");
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("select  * from mayikt_student");
+            resultSet = statement.executeQuery(sql);
             ArrayList<StudentEntity> studentEntities = new ArrayList<>();
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
@@ -37,10 +37,10 @@ public class Studentdao {
                 if (resultSet != null) {
                     resultSet.close();
                 }
-                if (statement != null){
+                if (statement != null) {
                     statement.close();
                 }
-                if (connection != null){
+                if (connection != null) {
                     connection.close();
                 }
 
@@ -50,4 +50,16 @@ public class Studentdao {
         }
         return null;
     }
+
+
+    public static ArrayList<StudentEntity> getByIdStudent(Long stuId){
+        //根据学生ID查询学生信息
+        if (stuId == null){
+            return null;
+        }else {
+            ArrayList<StudentEntity> studentEntities = inquireStudent("select * from mayikt_student where id=" + stuId);
+            return studentEntities;
+        }
+    }
 }
+

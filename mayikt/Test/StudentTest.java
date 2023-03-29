@@ -13,5 +13,8 @@ public class StudentTest {
                 studentEntities) {
             System.out.println(stu.toString());
         }
+        System.out.println("=========");
+        ArrayList<StudentEntity> studentEntity = studentServerce.inquireByIdStudent(2L);
+        System.out.println(studentEntity);
     }
 }
